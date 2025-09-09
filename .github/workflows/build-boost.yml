@@ -30,24 +30,33 @@ jobs:
           repository: pasqualelembo78/Boost-for-Android
           path: boost-android
 
-      # 3️⃣ Install dependencies + Android SDK tools
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y cmake build-essential git unzip python3 openjdk-11-jdk wget
+          sudo apt install -y cmake build-essential git unzip curl python3
 
-          # Scarica e installa cmdline-tools
+      # 4️⃣ Install Android SDK Command-line Tools
+      - name: Install Android SDK Command-line Tools
+        run: |
           mkdir -p $ANDROID_HOME/cmdline-tools
           cd $ANDROID_HOME/cmdline-tools
-          wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O cmdtools.zip
-          unzip cmdtools.zip -d latest
-          rm cmdtools.zip
+          curl -Lo commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip commandlinetools.zip -d latest
+          rm commandlinetools.zip
+          # Spostiamo i file nella cartella giusta
+          mkdir -p $ANDROID_HOME/cmdline-tools/latest
+          mv latest/* $ANDROID_HOME/cmdline-tools/latest/ || true
+          ls -R $ANDROID_HOME/cmdline-tools/latest
+
+      # 5️⃣ Install Android SDK packages (NDK + platform)
+      - name: Install Android SDK packages
+        run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+            "platform-tools" "platforms;android-31" "ndk;25.2.9519653"
 
-          # Installa NDK 25.2.9519653 e CMake
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "ndk;25.2.9519653" "cmake;3.28.0"
-
-      # 4️⃣ Build Boost
+      # 6️⃣ Build Boost for Android
       - name: Build Boost for Android
         run: |
           cd boost-android
@@ -58,7 +67,7 @@ jobs:
             --with-libraries=system,thread,filesystem,date_time,chrono,regex,serialization,program_options \
             --prefix=$BOOST_INSTALL_DIR
 
-      # 5️⃣ Configure Mevacoin with Boost
+      # 7️⃣ Configure Mevacoin with Boost
       - name: Configure Mevacoin
         run: |
           mkdir -p $MEVACOIN_INSTALL_DIR
@@ -71,13 +80,13 @@ jobs:
             -DBOOST_ROOT=$BOOST_INSTALL_DIR \
             -DBoost_NO_SYSTEM_PATHS=ON
 
-      # 6️⃣ Build Mevacoin
+      # 8️⃣ Build Mevacoin
       - name: Build Mevacoin
         run: |
           cd $MEVACOIN_INSTALL_DIR
           make -j$(nproc)
 
-      # 7️⃣ Upload artifacts
+      # 9️⃣ Upload artifacts
       - name: Upload Mevacoin APK/Binaries
         uses: actions/upload-artifact@v4
         with:
