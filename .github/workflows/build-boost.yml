@@ -10,6 +10,8 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     env:
+      ANDROID_HOME: ${{ github.workspace }}/android-sdk
+      ANDROID_NDK_HOME: ${{ github.workspace }}/android-sdk/ndk/25.2.9519653
       BOOST_INSTALL_DIR: ${{ github.workspace }}/boost-android
       MEVACOIN_INSTALL_DIR: ${{ github.workspace }}/mevacoin-build
 
@@ -28,21 +30,24 @@ jobs:
           repository: pasqualelembo78/Boost-for-Android
           path: boost-android
 
-      # 3️⃣ Install basic dependencies
+      # 3️⃣ Install dependencies + Android SDK tools
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y cmake build-essential git unzip python3 wget
+          sudo apt install -y cmake build-essential git unzip python3 openjdk-11-jdk wget
 
-      # 4️⃣ Setup Android SDK + NDK + CMake
-      - name: Setup Android SDK & NDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 31
-          ndk: 25.2.9519653
-          cmake: 3.28.0
+          # Scarica e installa cmdline-tools
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          cd $ANDROID_HOME/cmdline-tools
+          wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O cmdtools.zip
+          unzip cmdtools.zip -d latest
+          rm cmdtools.zip
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
-      # 5️⃣ Build Boost
+          # Installa NDK 25.2.9519653 e CMake
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "ndk;25.2.9519653" "cmake;3.28.0"
+
+      # 4️⃣ Build Boost
       - name: Build Boost for Android
         run: |
           cd boost-android
@@ -53,7 +58,7 @@ jobs:
             --with-libraries=system,thread,filesystem,date_time,chrono,regex,serialization,program_options \
             --prefix=$BOOST_INSTALL_DIR
 
-      # 6️⃣ Configure Mevacoin with Boost
+      # 5️⃣ Configure Mevacoin with Boost
       - name: Configure Mevacoin
         run: |
           mkdir -p $MEVACOIN_INSTALL_DIR
@@ -66,13 +71,13 @@ jobs:
             -DBOOST_ROOT=$BOOST_INSTALL_DIR \
             -DBoost_NO_SYSTEM_PATHS=ON
 
-      # 7️⃣ Build Mevacoin
+      # 6️⃣ Build Mevacoin
       - name: Build Mevacoin
         run: |
           cd $MEVACOIN_INSTALL_DIR
           make -j$(nproc)
 
-      # 8️⃣ Upload artifacts
+      # 7️⃣ Upload artifacts
       - name: Upload Mevacoin APK/Binaries
         uses: actions/upload-artifact@v4
         with:
