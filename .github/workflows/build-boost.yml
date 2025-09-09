@@ -66,9 +66,9 @@ jobs:
           cd $MEVACOIN_INSTALL_DIR
           make -j$(nproc)
 
-      # 7️⃣ Upload artifacts
+      # 7️⃣ Upload artifacts (aggiornato a v4)
       - name: Upload Mevacoin APK/Binaries
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mevacoin-android
           path: $MEVACOIN_INSTALL_DIR
