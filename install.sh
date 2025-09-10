@@ -120,7 +120,12 @@ cmake .. \
 # COMPILAZIONE BINARI
 # ==============================
 echo "==> Compilazione binari Mevacoin..."
-make -j "$NUM_CORES"
+# Salva stdout e stderr in build.log
+make -j "$NUM_CORES" > "$WORKDIR/build.log" 2>&1 || {
+    echo "==> La compilazione ha generato errori. Controlla $WORKDIR/build.log"
+    exit 1
+}
+
 
 # ==============================
 # PACCHETTO BINARI
