@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(MevacoinExternal)
 set(UPNPC_BUILD_STATIC ON CACHE BOOL "Build static library")
 set(UPNPC_BUILD_SHARED OFF CACHE BOOL "Build shared library")
 set(UPNPC_BUILD_TESTS OFF CACHE BOOL "Build test executables")
