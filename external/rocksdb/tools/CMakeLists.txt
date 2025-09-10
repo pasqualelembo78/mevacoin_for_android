@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(RocksDBTools)
 set(TOOLS
   sst_dump.cc
   db_sanity_test.cc
