@@ -1,0 +1,121 @@
+Procedura manuale riscritta di install.sh
+---
+
+1️⃣ Creazione cartelle Boost merge
+
+mkdir -p /opt/boost/android-merged/include /opt/boost/android-merged/lib
+
+Se esiste /opt/boost/boost_1_85_0, copialo:
+
+cp -r /opt/boost/boost_1_85_0/* /opt/boost/android-merged/include/ || true
+
+Copia la build Android di Boost:
+
+cp -r /opt/boost/build/out/arm64-v8a/include/* /opt/boost/android-merged/include/ || true
+cp -r /opt/boost/build/out/arm64-v8a/lib/* /opt/boost/android-merged/lib/ || true
+
+Esporta le variabili ambiente:
+
+export BOOST_ROOT=/opt/boost/android-merged
+export BOOST_INCLUDEDIR=/opt/boost/android-merged/include
+export BOOST_LIBRARYDIR=/opt/boost/android-merged/lib
+
+
+---
+
+2️⃣ Clonaggio o aggiornamento Mevacoin
+
+mkdir -p /root/mevacoin-android
+cd /root/mevacoin-android
+
+if [ ! -d "mevacoin_for_android/.git" ]; then
+    rm -rf mevacoin_for_android
+    git clone https://github.com/pasqualelembo78/mevacoin.git mevacoin_for_android
+else
+    cd mevacoin_for_android
+    git reset --hard
+    git pull
+    cd ..
+fi
+
+cd mevacoin_for_android
+
+
+---
+
+3️⃣ Compilazione RocksDB per Android
+
+cd external/rocksdb
+rm -rf build-android
+mkdir -p build-android out/arm64-v8a/lib out/arm64-v8a/include
+cd build-android
+
+CMake RocksDB:
+
+cmake .. \
+  -DCMAKE_TOOLCHAIN_FILE="/root/Android/Sdk/ndk/25.2.9519653/build/cmake/android.toolchain.cmake" \
+  -DANDROID_ABI=arm64-v8a \
+  -DANDROID_PLATFORM=android-24 \
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+  -DWITH_TESTS=OFF \
+  -DWITH_TOOLS=OFF \
+  -DWITH_BENCHMARK_TOOLS=OFF \
+  -DCMAKE_BUILD_TYPE=Release
+
+Compila RocksDB e salva i log:
+
+make -j $(nproc) rocksdb > /root/mevacoin-android/build_rocksdb.log 2>&1
+
+Copia include e libreria statica:
+
+cp -r ../include ../out/arm64-v8a/
+cp librocksdb.a ../out/arm64-v8a/lib/
+cd ../../
+
+
+---
+
+4️⃣ Pulizia build precedente
+
+rm -rf build
+mkdir -p build
+cd build
+
+
+---
+
+5️⃣ Configurazione CMake Mevacoin
+cmake .. \
+  -G "Unix Makefiles" \
+  -DCMAKE_TOOLCHAIN_FILE=/root/Android/Sdk/ndk/25.2.9519653/build/cmake/android.toolchain.cmake \
+  -DANDROID_ABI=arm64-v8a \
+  -DANDROID_PLATFORM=android-24 \
+  -DBOOST_ROOT=/opt/boost/android-merged \
+  -DBOOST_INCLUDEDIR=/opt/boost/android-merged/include \
+  -DBOOST_LIBRARYDIR=/opt/boost/android-merged/lib \
+  -DRocksDB_INCLUDE_DIR=/root/mevacoin-android/mevacoin_for_android/external/rocksdb/out/arm64-v8a/include \
+  -DRocksDB_LIBRARY=/root/mevacoin-android/mevacoin_for_android/external/rocksdb/out/arm64-v8a/lib/librocksdb.a \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+  -DCMAKE_CXX_FLAGS="-I/opt/boost/android-merged/include -I/root/mevacoin-android/mevacoin_for_android/external/rocksdb/out/arm64-v8a/include -D__ANDROID__ -DANDROID -Wno-error -Wno-shadow -Wno-deprecated-copy" \
+  -DFAIL_ON_WARNINGS=OFF
+
+---
+
+6️⃣ Compilazione binari Mevacoin
+
+make -j$(nproc) > /root/mevacoin-android/build.log 2>&1
+
+---
+
+7️⃣ Copia dei binari nell’output
+
+mkdir -p /root/mevacoin-android/output
+find src -maxdepth 1 -type f -executable -exec cp {} /root/mevacoin-android/output/ \;
+ls -l /root/mevacoin-android/output
+
+
+---
+
+Se vuoi, posso anche scriverti una variante che salva i log di tutte le fasi in file separati: clonaggio, rocksdb, cmake, make, così hai tutto tracciato. Vuoi che lo faccia?
+
