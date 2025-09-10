@@ -55,6 +55,9 @@ endif ()
 
 include(GNUInstallDirs)
 include(CheckCXXCompilerFlag)
+# Indica a CMake dove trovare cpu-features.h dell'NDK
+include_directories(/root/Android/Sdk/ndk/25.2.9519653/sources/android/cpufeatures)
+
 
 #============================================================================
 # Settable options
