@@ -1,5 +1,5 @@
 # We need 3.10 for modern CMake policies and better compatibility with Android toolchain
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.28)
 
 find_program(CCACHE_PROGRAM ccache)
 
