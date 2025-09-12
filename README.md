@@ -1,4 +1,9 @@
-Per eseguire la compilazione scarica prima Dockerfile.android e poi costruisci l'immagine 
+Procedura 
+
+1. Installare ambiente Android completo
+2. Scaricare mevacoin in /opt/mevacoin
+3. Compilare boost per Android con github.com
+4. Per eseguire la compilazione scarica prima Dockerfile.android e poi costruisci l'immagine 
 
 docker build --tag mevacoin-android --build-arg THREADS=4 -f Dockerfile.android .
 
