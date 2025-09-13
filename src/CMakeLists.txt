@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.5)
 project(MevacoinCore)
 # Build statically
 add_definitions(-DSTATICLIB)
@@ -137,11 +137,7 @@ elseif(UNIX)
     target_link_libraries(__filesystem INTERFACE)
 endif()
 
-if(MSVC)
-    target_link_libraries(mevacoind syst mevacoin_core rocksdb ${Boost_LIBRARIES})
-else()
-    target_link_libraries(mevacoind syst mevacoin_core rocksdblib ${Boost_LIBRARIES})
-endif()
+target_link_libraries(mevacoind syst mevacoin_core rocksdb ${Boost_LIBRARIES})
 
 # Add the dependencies we need
 target_link_libraries(common __filesystem)
