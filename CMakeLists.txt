@@ -1,7 +1,7 @@
 # ==============================================================
 # Mevacoin CMakeLists.txt per Android
 # ==============================================================
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.10)
 
 project(Mevacoin)
 
@@ -60,6 +60,15 @@ if(NOT MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
 endif()
+# ==============================================================
+# Include cpu-features per Android NDK
+# ==============================================================
+# Usa i file direttamente dall'NDK
+set(CPUFEATURES_DIR $ENV{ANDROID_NDK_ROOT}/sources/android/cpufeatures)
+
+include_directories(${CPUFEATURES_DIR})
+
+add_library(cpufeatures STATIC ${CPUFEATURES_DIR}/cpu-features.c)
 
 # ==============================================================
 # RocksDB precompilato
@@ -126,9 +135,14 @@ else()
 endif()
 
 # ==============================================================
-# Include directories
+# Include directories principali
 # ==============================================================
-include_directories(include "${CMAKE_CURRENT_BINARY_DIR}/version" src external)
+include_directories(
+    include
+    "${CMAKE_CURRENT_BINARY_DIR}/version"
+    src
+    external
+)
 
 # ==============================================================
 # Platform-specific
@@ -143,7 +157,7 @@ else()
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/platform/posix)
 endif()
 
-# ==============================================================
+# # ==============================================================
 # BOOST CONFIG
 # ==============================================================
 if(NOT DEFINED ENV{BOOST_ROOT})
@@ -151,9 +165,11 @@ if(NOT DEFINED ENV{BOOST_ROOT})
 endif()
 
 set(BOOST_ROOT "$ENV{BOOST_ROOT}")
-set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include")
+# Include diretto alla versione 1.85 se presente
+set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include/boost-1_85")
 set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
 
+# Controllo esistenza
 if(NOT EXISTS "${BOOST_INCLUDEDIR}")
     message(FATAL_ERROR "Boost include directory non trovato: ${BOOST_INCLUDEDIR}")
 endif()
