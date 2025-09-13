@@ -69,14 +69,13 @@ set(CPUFEATURES_DIR $ENV{ANDROID_NDK_ROOT}/sources/android/cpufeatures)
 include_directories(${CPUFEATURES_DIR})
 
 add_library(cpufeatures STATIC ${CPUFEATURES_DIR}/cpu-features.c)
-
 # ==============================================================
 # RocksDB precompilato
 # ==============================================================
 add_library(rocksdb STATIC IMPORTED)
 set_target_properties(rocksdb PROPERTIES
-    IMPORTED_LOCATION /root/mevacoin-android/mevacoin_for_android/external/rocksdb/out/arm64-v8a/lib/librocksdb.a
-    INTERFACE_INCLUDE_DIRECTORIES /root/mevacoin-android/mevacoin_for_android/external/rocksdb/include
+    IMPORTED_LOCATION /mevacoin/external/rocksdb/build-android/librocksdb.a
+    INTERFACE_INCLUDE_DIRECTORIES /mevacoin/external/rocksdb/include
 )
 
 # ==============================================================
