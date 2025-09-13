@@ -45,6 +45,29 @@ ln -s libboost_program_options-clang-mt-a64-1_85.a libboost_program_options.a
 mkdir -p /opt/boost/include
 ln -s /opt/boost/build/out/arm64-v8a/include/boost-1_85 /opt/boost/include/boost-1_85
 
+Se non riconosce o non trova le librerie 
+
+cd /opt/mevacoin/rocksdb
+
+
+cd build-android
+rm -rf *
+
+cmake .. \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake \
+  -DANDROID_ABI=arm64-v8a \
+  -DANDROID_PLATFORM=android-28 \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DWITH_TESTS=OFF \
+  -DWITH_TOOLS=OFF \
+  -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+
+
+
+
+
+
+
 
 
 
