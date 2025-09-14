@@ -75,6 +75,7 @@ Se hai fatto bene tutto dovrebbero stare tutto in Android.
 
 Poi strippare il contenuto di src compilato con $ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip mevacoind miner mevacoin-service wallet-api xkrwallet xkrwallet-beta crypto_test
 
+Fatto. Se Dio vuole abbiamo i file compressi pronti all'utilizzo su Android 
 
 
 
