@@ -62,12 +62,13 @@ cmake .. \
   -DWITH_TOOLS=OFF \
   -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 
+Alla fine della compilazione puoi ridurre le dimensioni del file rimuovendo i simboli. Fai così :
 
+Controlla innanzitutto su echo $ANDROID_NDK porta al ndk, altrimenti fai export ANDROID_NDK=/Android/Sdk/ndk/25.2.9519653
 
+Se hai fatto bene tutto dovrebbero stare tutto in Android. 
 
-
-
-
+Poi strippare il contenuto di src compilato con $ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip mevacoind miner mevacoin-service wallet-api xkrwallet xkrwallet-beta crypto_test
 
 
 
