@@ -62,9 +62,14 @@ cmake .. \
   -DWITH_TOOLS=OFF \
   -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 
-Alla fine della compilazione puoi ridurre le dimensioni del file rimuovendo i simboli. Fai così :
+Alla fine della compilazione puoi ridurre le dimensioni del file rimuovendo i simboli.
+I file compilati si troveranno in /opt/mevacoin/build-android/src
 
-Controlla innanzitutto su echo $ANDROID_NDK porta al ndk, altrimenti fai export ANDROID_NDK=/Android/Sdk/ndk/25.2.9519653
+Fai così :
+
+Controlla innanzitutto su echo $ANDROID_NDK porta al ndk, altrimenti fai echo 'export ANDROID_NDK=/root/Android/Sdk/ndk/25.2.9519653' >> ~/.bashrc
+
+Per renderla permanentr
 
 Se hai fatto bene tutto dovrebbero stare tutto in Android. 
 
