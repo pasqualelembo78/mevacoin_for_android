@@ -68,6 +68,9 @@ I file compilati si troveranno in /opt/mevacoin/build-android/src
 Fai così :
 
 Controlla innanzitutto su echo $ANDROID_NDK porta al ndk, altrimenti fai echo 'export ANDROID_NDK=/root/Android/Sdk/ndk/25.2.9519653' >> ~/.bashrc
+poi controlliamo anche $ANDROID_NDK_ROOT  se è corretto, altrimenti fai echo 'export ANDROID_NDK_ROOT=/root/Android/Sdk/ndk/25.2.9519653' >> ~/.bashrc
+source ~/.bashrc
+
 
 Per renderla permanentr
 
