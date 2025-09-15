@@ -1,29 +1,32 @@
+# MacOS
 .DS_Store
+
+# Build directories
 .build/
 build/
-/tags
-.idea
-.ycm_extra_conf.py
-.ycm_extra_conf.pyc
 build/src/Release
 build/src/Debug
+build-android-so/
+
+# Tags
+/tags
+
+# IDE
+.idea
+.vscode
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+cmake-build-debug
+
+# CMake
 src/CMakeCache.txt
 src/CMakeFiles/
 src/Makefile
 src/build/
 src/cmake_install.cmake
+
+# Swap files
 *.swp
-.vscode
-cmake-build-debug
+
+# Log files
 *.log
-# Ignora i binari generati
-/build-android-so/src/*.so
-/build-android-so/src/mevacoind
-/build-android-so/src/mevacoin-service
-/build-android-so/src/xkrwallet*
-/build-android-so/src/miner
-build-android-so/src/*.so
-build-android-so/src/mevacoind
-build-android-so/src/miner
-build-android-so/src/xkrwallet
-build-android-so/src/mevacoind-service
