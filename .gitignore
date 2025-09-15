@@ -22,3 +22,8 @@ cmake-build-debug
 /build-android-so/src/mevacoin-service
 /build-android-so/src/xkrwallet*
 /build-android-so/src/miner
+build-android-so/src/*.so
+build-android-so/src/mevacoind
+build-android-so/src/miner
+build-android-so/src/xkrwallet
+build-android-so/src/mevacoind-service
