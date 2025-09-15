@@ -50,6 +50,10 @@ Se non riconosce o non trova le librerie
 
 cd /opt/mevacoin/rocksdb
 
+Aggiorna cmake e ninja
+
+apt update && apt install -y cmake build-essential ninja-build
+
 
 cd build-android
 rm -rf *
