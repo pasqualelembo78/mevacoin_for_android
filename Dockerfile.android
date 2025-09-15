@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Scarica Android SDK & NDK
-ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV ANDROID_SDK_ROOT=/root/Android/Sdk
 ENV ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/25.2.9519653
 
 RUN mkdir -p $ANDROID_SDK_ROOT/cmdline-tools \
