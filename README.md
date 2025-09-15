@@ -48,24 +48,13 @@ ln -s /opt/boost/build/out/arm64-v8a/include/boost-1_85 /opt/boost/include/boost
 
 Se non riconosce o non trova le librerie 
 
-cd /opt/mevacoin/rocksdb
+cd /opt/mevacoin/external/rocksdb
 
 Aggiorna cmake e ninja
 
 apt update && apt install -y cmake build-essential ninja-build
 
-
-cd build-android
-rm -rf *
-
-cmake .. \
-  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake \
-  -DANDROID_ABI=arm64-v8a \
-  -DANDROID_PLATFORM=android-28 \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DWITH_TESTS=OFF \
-  -DWITH_TOOLS=OFF \
-  -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+Avvia il bash ./build-android.sh 
 
 Alla fine della compilazione puoi ridurre le dimensioni del file rimuovendo i simboli.
 I file compilati si troveranno in /opt/mevacoin/build-android/src
