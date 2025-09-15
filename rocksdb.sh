@@ -4,13 +4,13 @@ set -euo pipefail
 # ==============================
 # Configurazione
 # ==============================
-NDK_PATH=/opt/android-sdk/ndk/23.1.7779620
+NDK_PATH=/root/Android/Sdk/ndk/25.2.9519653
 ANDROID_API=24
 ABI=arm64-v8a
 NUM_CORES=$(nproc)
 
 # Directory RocksDB
-WORKDIR=/root/mevacoin-android/mevacoin/external/rocksdb
+WORKDIR=/opt/mevacoin/external/rocksdb
 BUILD_DIR=$WORKDIR/build-android
 INSTALL_DIR=$WORKDIR/out/$ABI
 
