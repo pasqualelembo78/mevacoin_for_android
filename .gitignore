@@ -16,3 +16,9 @@ src/cmake_install.cmake
 .vscode
 cmake-build-debug
 *.log
+# Ignora i binari generati
+/build-android-so/src/*.so
+/build-android-so/src/mevacoind
+/build-android-so/src/mevacoin-service
+/build-android-so/src/xkrwallet*
+/build-android-so/src/miner
