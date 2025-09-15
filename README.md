@@ -70,4 +70,4 @@ Fatto. Così hai i binari Eseguibili
 
 Con questo hai i so
 
-docker run --rm -it -v /opt/mevacoin:/mevacoin -v /opt/boost/build/out/arm64-v8a/include:/opt/boost/include -v /opt/boost/build/out/arm64-v8a/lib:/opt/boost/lib -w /mevacoin mevacoin-android bash -c "export BOOST_ROOT=/opt/boost && mkdir -p build-android-so && cd build-android-so && cmake .. -DCMAKE_TOOLCHAIN_FILE=/opt/android-sdk/ndk/25.2.9519653/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-28 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -G Ninja && ninja -j\$(nproc)"
+docker run --rm -it -v /opt/mevacoin:/mevacoin -v /opt/boost/build/out/arm64-v8a/include:/opt/boost/include -v /opt/boost/build/out/arm64-v8a/lib:/opt/boost/lib -w /mevacoin mevacoin-android bash -c "export BOOST_ROOT=/opt/boost && mkdir -p build-android-so && cd build-android-so && cmake .. -DCMAKE_TOOLCHAIN_FILE=/root/Android/Sdk/ndk/25.2.9519653/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-28 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -G Ninja && ninja -j\$(nproc)"
