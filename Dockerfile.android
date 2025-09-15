@@ -10,18 +10,22 @@ RUN apt-get update && apt-get install -y \
     git curl unzip build-essential cmake pkg-config \
     python3 python3-pip ninja-build \
     openjdk-11-jdk gradle \
-    wget unzip \
+    wget bzip2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Scarica Android SDK & NDK
+# Imposta variabili Android
+ENV ANDROID_HOME=/root/Android/Sdk
 ENV ANDROID_SDK_ROOT=/root/Android/Sdk
 ENV ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/25.2.9519653
+ENV PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH
 
+# Scarica e configura Android SDK & NDK
 RUN mkdir -p $ANDROID_SDK_ROOT/cmdline-tools \
     && cd $ANDROID_SDK_ROOT/cmdline-tools \
-    && wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O sdk.zip \
-    && unzip sdk.zip -d tools && rm sdk.zip \
-    && yes | tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
+    && wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip \
+    && unzip cmdline-tools.zip \
+    && rm cmdline-tools.zip \
+    && mkdir -p latest \
+    && mv cmdline-tools/* latest/ \
+    && yes | latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
        "platform-tools" "platforms;android-28" "ndk;25.2.9519653" "cmake;3.22.1"
-
-ENV PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
