@@ -1,9 +1,19 @@
 Procedura 
 
 1. Installare ambiente Android completo
-2. Scaricare mevacoin in /opt/mevacoin
-3. Compilare boost per Android con github.com
-4. Per eseguire la compilazione scarica prima Dockerfile.android e poi costruisci l'immagine 
+2. Controlla le variabili con
+
+  echo $ANDROID_HOME
+echo $ANDROID_NDK_ROOT
+echo $PATH | tr ':' '\n' | grep ndk
+
+Se non porta a niente allora definisci con export ANDROID_NDK_ROOT=/root/Android/Sdk/ndk/25.2.9519653
+
+export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH
+
+4. Scaricare mevacoin in /opt/mevacoin
+5. Compilare boost per Android con github.com
+6. Per eseguire la compilazione scarica prima Dockerfile.android e poi costruisci l'immagine 
 
 docker build --tag mevacoin-android --build-arg THREADS=4 -f Dockerfile.android .
 
