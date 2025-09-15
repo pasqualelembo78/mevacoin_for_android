@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/mevacoin-android/mevacoin/external/rocksdb
+CMAKE_SOURCE_DIR = /opt/mevacoin/external/rocksdb
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/mevacoin-android/mevacoin/external/rocksdb/build-android
+CMAKE_BINARY_DIR = /opt/mevacoin/external/rocksdb/build-android
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(CMAKE_COMMAND) -E cmake_progress_start /root/mevacoin-android/mevacoin/external/rocksdb/build-android/CMakeFiles /root/mevacoin-android/mevacoin/external/rocksdb/build-android/third-party/gtest-1.7.0/fused-src/gtest//CMakeFiles/progress.marks
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/mevacoin-android/mevacoin/external/rocksdb/build-android/CMakeFiles 0
+	cd /opt/mevacoin/external/rocksdb/build-android && $(CMAKE_COMMAND) -E cmake_progress_start /opt/mevacoin/external/rocksdb/build-android/CMakeFiles /opt/mevacoin/external/rocksdb/build-android/third-party/gtest-1.7.0/fused-src/gtest//CMakeFiles/progress.marks
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /opt/mevacoin/external/rocksdb/build-android/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/clean
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/preinstall
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/preinstall
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /opt/mevacoin/external/rocksdb/build-android && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/rule:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/rule
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/rule
 .PHONY : third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/rule
 
 # Convenience name for target.
@@ -172,7 +172,7 @@ gtest: third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/rule
 
 # fast build rule for target.
 gtest/fast:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
 gtest-all.o: gtest-all.cc.o
@@ -180,7 +180,7 @@ gtest-all.o: gtest-all.cc.o
 
 # target to build an object file
 gtest-all.cc.o:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/gtest-all.cc.o
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/gtest-all.cc.o
 .PHONY : gtest-all.cc.o
 
 gtest-all.i: gtest-all.cc.i
@@ -188,7 +188,7 @@ gtest-all.i: gtest-all.cc.i
 
 # target to preprocess a source file
 gtest-all.cc.i:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/gtest-all.cc.i
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/gtest-all.cc.i
 .PHONY : gtest-all.cc.i
 
 gtest-all.s: gtest-all.cc.s
@@ -196,7 +196,7 @@ gtest-all.s: gtest-all.cc.s
 
 # target to generate assembly for a file
 gtest-all.cc.s:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/gtest-all.cc.s
+	cd /opt/mevacoin/external/rocksdb/build-android && $(MAKE) $(MAKESILENT) -f third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/build.make third-party/gtest-1.7.0/fused-src/gtest/CMakeFiles/gtest.dir/gtest-all.cc.s
 .PHONY : gtest-all.cc.s
 
 # Help Target
@@ -226,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /root/mevacoin-android/mevacoin/external/rocksdb/build-android && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /opt/mevacoin/external/rocksdb/build-android && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
