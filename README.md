@@ -14,6 +14,14 @@ export ANDROID_SDK_ROOT=/root/Android/Sdk
 export ANDROID_NDK_ROOT=/root/Android/Sdk/ndk/25.2.9519653
 export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH
 
+oppure in maniera permanente (se funziona correttamente):
+
+echo 'export ANDROID_HOME=/root/Android/Sdk
+export ANDROID_SDK_ROOT=/root/Android/Sdk
+export ANDROID_NDK_ROOT=/root/Android/Sdk/ndk/25.2.9519653
+export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH' >> ~/.bashrc && source ~/.bashrc
+
+
 4. Scaricare mevacoin in /opt/mevacoin
 5. Compilare boost per Android con github.com
 6. Per eseguire la compilazione scarica prima Dockerfile.android e poi costruisci l'immagine 
