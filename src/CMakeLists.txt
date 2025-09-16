@@ -104,12 +104,43 @@ if(MSVC)
 endif()
 
 add_executable(crypto_test ${crypto_test} ${CT_SOURCES_OS})
+# --- TARGET SHARED ---
 add_library(miner SHARED ${miner} ${MINER_SOURCES_OS})
 add_library(service SHARED ${service} ${PG_SOURCES_OS})
 add_library(mevacoind SHARED ${mevacoind} ${DAEMON_SOURCES_OS})
 add_library(wallet_api SHARED ${wallet_api} ${WALLET_API_SOURCES_OS})
 add_library(zedwallet SHARED ${zedwallet} ${ZED_WALLET_SOURCES_OS})
 add_library(zedwallet++ SHARED ${zedwallet++} ${ZED_WALLET_SOURCES_OS})
+
+# Link SHARED
+target_link_libraries(miner mevacoin_core rpc syst http crypto errors utilities)
+target_link_libraries(service json_rpc_server wallet mnemonics errors)
+target_link_libraries(mevacoind syst mevacoin_core rocksdb ${Boost_LIBRARIES})
+target_link_libraries(wallet_api wallet_backend)
+target_link_libraries(zedwallet mnemonics wallet errors utilities)
+target_link_libraries(zedwallet++ wallet_backend)
+
+# --- TARGET STATIC ---
+add_library(miner_static STATIC ${miner} ${MINER_SOURCES_OS})
+set_property(TARGET miner_static PROPERTY OUTPUT_NAME "miner")
+add_library(service_static STATIC ${service} ${PG_SOURCES_OS})
+set_property(TARGET service_static PROPERTY OUTPUT_NAME "mevacoin-service")
+add_library(mevacoind_static STATIC ${mevacoind} ${DAEMON_SOURCES_OS})
+set_property(TARGET mevacoind_static PROPERTY OUTPUT_NAME "mevacoind")
+add_library(wallet_api_static STATIC ${wallet_api} ${WALLET_API_SOURCES_OS})
+set_property(TARGET wallet_api_static PROPERTY OUTPUT_NAME "wallet-api")
+add_library(zedwallet_static STATIC ${zedwallet} ${ZED_WALLET_SOURCES_OS})
+set_property(TARGET zedwallet_static PROPERTY OUTPUT_NAME "xkrwallet")
+add_library(zedwallet++_static STATIC ${zedwallet++} ${ZED_WALLET_SOURCES_OS})
+set_property(TARGET zedwallet++_static PROPERTY OUTPUT_NAME "xkrwallet-beta")
+
+# Link STATIC
+target_link_libraries(miner_static mevacoin_core rpc syst http crypto errors utilities)
+target_link_libraries(service_static json_rpc_server wallet mnemonics errors)
+target_link_libraries(mevacoind_static syst mevacoin_core rocksdb ${Boost_LIBRARIES})
+target_link_libraries(wallet_api_static wallet_backend)
+target_link_libraries(zedwallet_static mnemonics wallet errors utilities)
+target_link_libraries(zedwallet++_static wallet_backend)
 
 if(MSVC)
     target_link_libraries(syst ws2_32)
