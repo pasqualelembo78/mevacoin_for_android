@@ -51,8 +51,8 @@ ln -s libboost_program_options-clang-mt-a64-1_85.a libboost_program_options.a
 
 
 
-mkdir -p /opt/boost/include
-ln -s /opt/boost/build/out/arm64-v8a/include/boost-1_85 /opt/boost/include/boost-1_85
+mkdir -p /opt/boost/include && ln -s /opt/boost/build/out/arm64-v8a/include/boost-1_85 /opt/boost/include/boost-1_85
+
 
 Se non riconosce o non trova le librerie 
 
