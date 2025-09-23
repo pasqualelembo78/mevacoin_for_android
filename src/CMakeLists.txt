@@ -170,6 +170,28 @@ endif()
 
 target_link_libraries(mevacoind syst mevacoin_core rocksdb ${Boost_LIBRARIES})
 
+# ---- BINARI NATIVI ANDROID ----
+add_executable(mevacoind_bin ${mevacoind} ${DAEMON_SOURCES_OS})
+target_link_libraries(mevacoind_bin syst mevacoin_core rocksdb ${Boost_LIBRARIES})
+set_target_properties(mevacoind_bin PROPERTIES OUTPUT_NAME "mevacoind")
+
+add_executable(miner_bin ${miner} ${MINER_SOURCES_OS})
+target_link_libraries(miner_bin mevacoin_core rpc syst http crypto errors utilities)
+set_target_properties(miner_bin PROPERTIES OUTPUT_NAME "miner")
+
+add_executable(zedwallet_bin ${zedwallet} ${ZED_WALLET_SOURCES_OS})
+target_link_libraries(zedwallet_bin mnemonics wallet errors utilities)
+set_target_properties(zedwallet_bin PROPERTIES OUTPUT_NAME "xkrwallet")
+
+add_executable(zedwalletpp_bin ${zedwallet++} ${ZED_WALLET_SOURCES_OS})
+target_link_libraries(zedwalletpp_bin wallet_backend)
+set_target_properties(zedwalletpp_bin PROPERTIES OUTPUT_NAME "xkrwallet-beta")
+
+add_executable(service_bin ${service} ${PG_SOURCES_OS})
+target_link_libraries(service_bin json_rpc_server wallet mnemonics errors)
+set_target_properties(service_bin PROPERTIES OUTPUT_NAME "mevacoin-service")
+
+
 # Add the dependencies we need
 target_link_libraries(common __filesystem)
 target_link_libraries(mevacoin_core common logging crypto p2p rpc http serialization syst ${Boost_LIBRARIES})

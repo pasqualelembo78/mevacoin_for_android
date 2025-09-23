@@ -1,32 +1,24 @@
-# MacOS
-.DS_Store
-
 # Build directories
-.build/
-build/
-build/src/Release
-build/src/Debug
 build-android-so/
+build-android-a/
+build-android-bin/
 
-# Tags
-/tags
+# File temporanei di CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
 
-# IDE
-.idea
-.vscode
-.ycm_extra_conf.py
-.ycm_extra_conf.pyc
-cmake-build-debug
-
-# CMake
-src/CMakeCache.txt
-src/CMakeFiles/
-src/Makefile
-src/build/
-src/cmake_install.cmake
-
-# Swap files
-*.swp
-
-# Log files
+# File IDE
+*.user
 *.log
+*.swp
+*.swo
+*.DS_Store
+
+# Librerie precompilate eventualmente grandi
+*.a
+*.so
+*.dll
+*.exe
+
