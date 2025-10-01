@@ -78,7 +78,7 @@ namespace mevacoin
         /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
            You can get this value by doing "print_block 2" in TurtleCoind. It is used to know what timestamp
            to import from when the block height cannot be found in the node or the node is offline. */
-        const uint64_t GENESIS_BLOCK_TIMESTAMP = 1729612800;
+        const uint64_t GENESIS_BLOCK_TIMESTAMP = 1324214400;
 
         const size_t MEVACOIN_REWARD_BLOCKS_WINDOW = 100;
         const size_t MEVACOIN_BLOCK_GRANTED_FULL_REWARD_ZONE = 100000; // size of block (bytes) after which reward for block calculated using block size
