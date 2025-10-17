@@ -130,9 +130,9 @@ set_property(TARGET mevacoind_static PROPERTY OUTPUT_NAME "mevacoind")
 add_library(wallet_api_static STATIC ${wallet_api} ${WALLET_API_SOURCES_OS})
 set_property(TARGET wallet_api_static PROPERTY OUTPUT_NAME "wallet-api")
 add_library(zedwallet_static STATIC ${zedwallet} ${ZED_WALLET_SOURCES_OS})
-set_property(TARGET zedwallet_static PROPERTY OUTPUT_NAME "xkrwallet")
+set_property(TARGET zedwallet_static PROPERTY OUTPUT_NAME "mvcwallet")
 add_library(zedwallet++_static STATIC ${zedwallet++} ${ZED_WALLET_SOURCES_OS})
-set_property(TARGET zedwallet++_static PROPERTY OUTPUT_NAME "xkrwallet-beta")
+set_property(TARGET zedwallet++_static PROPERTY OUTPUT_NAME "mvcwallet-beta")
 
 # Link STATIC
 target_link_libraries(miner_static mevacoin_core rpc syst http crypto errors utilities)
@@ -181,11 +181,11 @@ set_target_properties(miner_bin PROPERTIES OUTPUT_NAME "miner")
 
 add_executable(zedwallet_bin ${zedwallet} ${ZED_WALLET_SOURCES_OS})
 target_link_libraries(zedwallet_bin mnemonics wallet errors utilities)
-set_target_properties(zedwallet_bin PROPERTIES OUTPUT_NAME "xkrwallet")
+set_target_properties(zedwallet_bin PROPERTIES OUTPUT_NAME "mvcwallet")
 
 add_executable(zedwalletpp_bin ${zedwallet++} ${ZED_WALLET_SOURCES_OS})
 target_link_libraries(zedwalletpp_bin wallet_backend)
-set_target_properties(zedwalletpp_bin PROPERTIES OUTPUT_NAME "xkrwallet-beta")
+set_target_properties(zedwalletpp_bin PROPERTIES OUTPUT_NAME "mvcwallet-beta")
 
 add_executable(service_bin ${service} ${PG_SOURCES_OS})
 target_link_libraries(service_bin json_rpc_server wallet mnemonics errors)
