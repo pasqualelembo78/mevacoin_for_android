@@ -78,7 +78,19 @@ Per renderla permanente
 Se hai fatto bene tutto dovrebbero stare tutto in Android. 
 
 Poi strippare il contenuto di src compilato con 
-find build-android-so -type f -name "*.so" -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \; && find build-android-a -type f -name "*.a" -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \; && find build-android-bin -type f -perm -111 -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \;
+ROOT=/opt/mevacoin
+
+# Strippa tutti i .so e .a
+find "$ROOT" \( -name "*.so" -o -name "*.a" \) -type f -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \;
+
+# Strippa tutti i binari PIE ELF Android
+find "$ROOT" -type f -exec sh -c '
+  for f do
+    if file "$f" | grep -q "ELF" && ! file "$f" | grep -q "shared object"; then
+      /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-debug "$f"
+    fi
+  done
+' sh {} +
 
 
 Fatto. 
