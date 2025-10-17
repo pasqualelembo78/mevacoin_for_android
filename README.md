@@ -78,11 +78,7 @@ Per renderla permanente
 Se hai fatto bene tutto dovrebbero stare tutto in Android. 
 
 Poi strippare il contenuto di src compilato con 
-find build-android-so -type f -name "*.so" \
-   -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \; \
-&& find build-android-a -type f -name "*.a" \
-   -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \; \
-&& find build-android-bin -type f -perm -111 \
-   -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \;
+find build-android-so -type f -name "*.so" -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \; && find build-android-a -type f -name "*.a" -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \; && find build-android-bin -type f -perm -111 -exec /root/Android/Sdk/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded {} \;
+
 
 Fatto. 
