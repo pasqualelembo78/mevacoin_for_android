@@ -84,14 +84,7 @@ Aggiorna i simlink
 
 cd /opt/boost/build/out/arm64-v8a/lib
 
-ln -s libboost_system-clang-mt-a64-1_85.a libboost_system.a
-ln -s libboost_filesystem-clang-mt-a64-1_85.a libboost_filesystem.a
-ln -s libboost_thread-clang-mt-a64-1_85.a libboost_thread.a
-ln -s libboost_date_time-clang-mt-a64-1_85.a libboost_date_time.a
-ln -s libboost_chrono-clang-mt-a64-1_85.a libboost_chrono.a
-ln -s libboost_regex-clang-mt-a64-1_85.a libboost_regex.a
-ln -s libboost_serialization-clang-mt-a64-1_85.a libboost_serialization.a
-ln -s libboost_program_options-clang-mt-a64-1_85.a libboost_program_options.a
+ln -s libboost_system-clang-mt-a64-1_85.a libboost_system.a && ln -s libboost_filesystem-clang-mt-a64-1_85.a libboost_filesystem.a && ln -s libboost_thread-clang-mt-a64-1_85.a libboost_thread.a && ln -s libboost_date_time-clang-mt-a64-1_85.a libboost_date_time.a && ln -s libboost_chrono-clang-mt-a64-1_85.a libboost_chrono.a && ln -s libboost_regex-clang-mt-a64-1_85.a libboost_regex.a && ln -s libboost_serialization-clang-mt-a64-1_85.a libboost_serialization.a && ln -s libboost_program_options-clang-mt-a64-1_85.a libboost_program_options.a
 
 
 
