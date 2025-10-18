@@ -188,6 +188,11 @@ target_link_libraries(zedwalletpp_bin wallet_backend)
 set_target_properties(zedwalletpp_bin PROPERTIES OUTPUT_NAME "mvcwallet-beta")
 
 add_executable(service_bin ${service} ${PG_SOURCES_OS})
+# --- WALLET API BINARIO ---
+add_executable(walletapi_bin ${wallet_api} ${WALLET_API_SOURCES_OS})
+target_link_libraries(walletapi_bin wallet_backend mevacoin_core mnemonics utilities)
+set_target_properties(walletapi_bin PROPERTIES OUTPUT_NAME "wallet-api")
+
 target_link_libraries(service_bin json_rpc_server wallet mnemonics errors)
 set_target_properties(service_bin PROPERTIES OUTPUT_NAME "mevacoin-service")
 
